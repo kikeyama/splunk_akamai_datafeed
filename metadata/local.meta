@@ -1,0 +1,42 @@
+[app/ui]
+version = 6.6.3
+modtime = 1507689227.218294000
+
+[app/launcher]
+version = 6.6.3
+modtime = 1507689227.219266000
+
+[props/akamai%3Adatafeed%3Ajson]
+owner = admin
+version = 6.6.3
+modtime = 1507887457.259983000
+
+[indexes/akamai]
+owner = admin
+version = 6.6.3
+modtime = 1509083974.887961000
+
+[views/data_feed_analysis]
+owner = admin
+version = 6.6.3
+modtime = 1508730980.579295000
+
+[indexes/test]
+owner = admin
+version = 6.6.3
+modtime = 1508405287.003072000
+
+[]
+access = read : [ * ], write : [ admin, power ]
+export = system
+version = 6.6.3
+modtime = 1508409092.958383000
+
+[views/attackers_vector]
+owner = admin
+version = 6.6.3
+modtime = 1509419576.351651000
+
+[nav/default]
+version = 6.6.3
+modtime = 1509417809.954954000

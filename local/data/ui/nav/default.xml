@@ -1,0 +1,12 @@
+<nav search_view="search" color="#65A637">
+  <view name="data_feed_analysis" default='true' />
+  <view name="reputation_search" />
+  <view name="attackers_vector" />
+  <collection label="SEARCH">
+    <view name="search" />
+    <view name="datasets" />
+    <view name="reports" />
+    <view name="alerts" />
+    <view name="dashboards" />
+  </collection>
+</nav>

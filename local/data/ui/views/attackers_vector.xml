@@ -1,0 +1,78 @@
+<dashboard>
+  <label>Attackers Vector</label>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>index=akamai sourcetype=akamaisiem 
+| rename attackData.clientIP as ip 
+| stats latest(geo.country) as country latest(geo.city) as city count(eval(type="akamai_siem")) as attack_count sparkline(count(eval(type="akamai_siem"))) as sparkline by ip 
+| join type=left ip 
+    [search index=akamai sourcetype=akamai:datafeed:json source=sample.akamai.datafeed.fixedip 
+    | stats latest(score) as score by ip] 
+| table ip country city score attack_count sparkline 
+| sort - attack_count</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="number" field="attack_count">
+          <option name="precision">0</option>
+        </format>
+        <drilldown>
+          <set token="ip">$click.value$</set>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="$ip$">
+      <title>Reputation Score for IP: $ip$</title>
+      <chart>
+        <search>
+          <query>index=akamai sourcetype=akamai:datafeed:json ip="$ip$" 
+| timechart latest(score) as score span=1h</query>
+          <earliest>-7d@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisLabelsY.majorUnit">1</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.maximumNumber">10</option>
+        <option name="charting.axisY.minimumNumber">0</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">connect</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+  </row>
+</dashboard>
