@@ -1,0 +1,155 @@
+vertical,subvertical
+Automotive,
+Automotive,Manufacturing
+Automotive,Motorcycle
+Automotive,Other
+Automotive,RV
+Automotive,Truck Bus & Rail
+Business Services,
+Business Services,BPO
+Business Services,Computer Services
+Business Services,Consulting
+Business Services,Information Services
+Business Services,Logistics
+Business Services,Other
+Business Services,Staffing
+Consumer Goods,
+Consumer Goods,Cleansers
+Consumer Goods,Drinks
+Consumer Goods,Eyewear
+Consumer Goods,Food
+Consumer Goods,Furniture
+Consumer Goods,Housewear
+Consumer Goods,Office Supplies
+Consumer Goods,Other
+Consumer Goods,Perfume/ Cosmetics
+Consumer Goods,Personal Care
+Consumer Goods,Tobacco
+Consumer Services,
+Consumer Services,Auto Repair
+Consumer Services,Beauty & Health
+Consumer Services,Food Service
+Consumer Services,Other
+Education,
+Education,E-Learning
+Education,Private Higher Ed
+Energy & Utilities,
+Energy & Utilities,Oil & Gas
+Energy & Utilities,Utilities
+Financial Services,
+Financial Services,Asset Management
+Financial Services,Banking
+Financial Services,Brokers & Traders
+Financial Services,Cards & Payments
+Financial Services,Credit Union
+Financial Services,Exchanges
+Financial Services,FinTech
+Financial Services,Forex
+Financial Services,Information Services
+Financial Services,Insurance
+Financial Services,Lending
+Financial Services,Other
+Foundation-Not for Profit,
+Gaming,
+Gaming,Console Mfs
+Gaming,Gaming Stores
+Gaming,Other
+Gaming,Publishers
+High Technology,
+High Technology,Consumer Connected Device
+High Technology,Consumer Software (B2C)
+High Technology,Enterprise Hardware
+High Technology,Enterprise Software (B2B)
+High Technology,ISP
+High Technology,Other
+High Technology,Security Software
+High Technology,Semiconductors
+High Technology,Telecommunications
+Hotel & Travel,
+Hotel & Travel,Airline
+Hotel & Travel,Cruise lines
+Hotel & Travel,Hotels & Resorts
+Hotel & Travel,Online Travel Agents
+Hotel & Travel,Other
+Hotel & Travel,Rental Car
+Hotel & Travel,Transportation
+Hotel & Travel,Travel Content Site
+Hotel & Travel,Travel Search Engine
+Manufacturing,
+Manufacturing,Aerospace & Defense
+Manufacturing,Agricultural Equipm
+Manufacturing,Auto Parts
+Manufacturing,Chemicals
+Manufacturing,Construction Equipm
+Manufacturing,Industrial Equipm
+Manufacturing,Metals
+Manufacturing,Other
+Manufacturing,Paint & Coatings
+Manufacturing,Plastic & Glass
+Manufacturing,Shipbuilding
+Manufacturing,Textiles
+Manufacturing,Wire & Cable
+Media & Entertainment,
+Media & Entertainment,Advertisement
+Media & Entertainment,Advertising Technology
+Media & Entertainment,Broadcast (TV, Cable)
+Media & Entertainment,Cable Satellite MSO
+Media & Entertainment,Mobile
+Media & Entertainment,Motion Picture
+Media & Entertainment,Music
+Media & Entertainment,Other
+Media & Entertainment,Portal/Search
+Media & Entertainment,Publishing
+Media & Entertainment,Radio
+Media & Entertainment,Social Media
+Media & Entertainment,Sports
+Media & Entertainment,VAR M&E
+Miscellaneous,
+Not Defined,
+Pharma/Health Care,
+Pharma/Health Care,Biotech
+Pharma/Health Care,Healthcare Payer
+Pharma/Health Care,Healthcare Provider
+Pharma/Health Care,Medical Device
+Pharma/Health Care,Other
+Pharma/Health Care,Pharmaceutical
+Pharma/Health Care,Software as a Service
+Pharma/Health Care,Supply & Distribution
+Public Sector,
+Public Sector,Federal
+Public Sector,Higher Ed
+Public Sector,State & Local
+Real Estate,
+Real Estate,Other
+Retail,
+Retail,Apparel & Footwear
+Retail,Automotive Parts
+Retail,Catalog/Pure Web Retail
+Retail,Commerce Portal
+Retail,Consumer Electronics
+Retail,Department Stores
+Retail,Food Supermarkets
+Retail,Jewelry & Watch
+Retail,Office Supplies
+Retail,Other
+Retail,Sporting Goods
+Retail,Toys
+Software as a Service,
+Software as a Service,Automotive
+Software as a Service,Business Services
+Software as a Service,Consumer Goods Mfg
+Software as a Service,Consumer Services
+Software as a Service,Education
+Software as a Service,Energy & Utilities
+Software as a Service,Financial Services
+Software as a Service,Gaming
+Software as a Service,High Technology
+Software as a Service,Hotel & Travel
+Software as a Service,Manufacturing
+Software as a Service,Media & Entertainment
+Software as a Service,Miscellaneous
+Software as a Service,Multiple Verticals
+Software as a Service,Non-Profit
+Software as a Service,Pharma/Health Care
+Software as a Service,Public Sector
+Software as a Service,Retail

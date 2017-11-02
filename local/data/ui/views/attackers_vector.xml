@@ -1,16 +1,119 @@
-<dashboard>
+<form>
   <label>Attackers Vector</label>
+  <fieldset submitButton="false"></fieldset>
   <row>
     <panel>
+      <viz type="missile_map.missile_map">
+        <search>
+          <query>index=akamai sourcetype=akamaisiem 
+| iplocation prefix=start_ src 
+| eval end_lat="35.689506", end_lon="139.6917", weight="0.2"
+| table start_lat start_lon end_lat end_lon weight</query>
+          <earliest>-15m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="missile_map.missile_map.lineThickness">1</option>
+        <option name="missile_map.missile_map.mapLatitude">35</option>
+        <option name="missile_map.missile_map.mapLongitude">0</option>
+        <option name="missile_map.missile_map.mapZoom">2</option>
+        <option name="missile_map.missile_map.staticColor">#FF0000</option>
+        <option name="missile_map.missile_map.tileSet">dark_tiles</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </viz>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Attack Activities by Time</title>
+      <viz type="calendar_heatmap_app.calendar_heatmap">
+        <search>
+          <query>index=akamai sourcetype=akamaisiem attackData.clientIP="*" 
+| timechart span=1m count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="calendar_heatmap_app.calendar_heatmap.cellPadding">2</option>
+        <option name="calendar_heatmap_app.calendar_heatmap.cellSize">10</option>
+        <option name="calendar_heatmap_app.calendar_heatmap.cellStyle">square</option>
+        <option name="calendar_heatmap_app.calendar_heatmap.legendType">uniform</option>
+        <option name="calendar_heatmap_app.calendar_heatmap.maxColor">#d93f3c</option>
+        <option name="calendar_heatmap_app.calendar_heatmap.minColor">#f9de5a</option>
+        <option name="calendar_heatmap_app.calendar_heatmap.numOfBins">5</option>
+        <option name="calendar_heatmap_app.calendar_heatmap.showLegend">true</option>
+        <option name="calendar_heatmap_app.calendar_heatmap.splitMonths">true</option>
+        <option name="drilldown">none</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </viz>
+    </panel>
+    <panel>
+      <title>Attack Count by ASN</title>
+      <chart>
+        <search>
+          <query>index=akamai sourcetype=akamaisiem 
+| top geo.asn</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <drilldown>
+          <set token="asn">$click.value$</set>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Attackers Vector Analysis</title>
       <table>
+        <title>Reputation Score vs Attack Detection</title>
         <search>
           <query>index=akamai sourcetype=akamaisiem 
 | rename attackData.clientIP as ip 
-| stats latest(geo.country) as country latest(geo.city) as city count(eval(type="akamai_siem")) as attack_count sparkline(count(eval(type="akamai_siem"))) as sparkline by ip 
+| stats latest(geo.country) as country latest(geo.city) as city latest(geo.asn) as asn count(eval(type="akamai_siem")) as attack_count sparkline(count(eval(type="akamai_siem"))) as sparkline by ip 
 | join type=left ip 
-    [search index=akamai sourcetype=akamai:datafeed:json source=sample.akamai.datafeed.fixedip 
+    [search index=akamai sourcetype=akamai:datafeed:json 
     | stats latest(score) as score by ip] 
-| table ip country city score attack_count sparkline 
+| table ip asn country city score attack_count sparkline 
 | sort - attack_count</query>
           <earliest>-60m@m</earliest>
           <latest>now</latest>
@@ -28,14 +131,18 @@
         </format>
         <drilldown>
           <set token="ip">$click.value$</set>
+          <set token="asn">$click.value2$</set>
         </drilldown>
       </table>
-    </panel>
-  </row>
-  <row>
-    <panel depends="$ip$">
-      <title>Reputation Score for IP: $ip$</title>
-      <chart>
+      <chart depends="$ip$">
+        <title>Reputation Score for IP: $ip$</title>
+        <search type="annotation">
+          <query>index=akamai sourcetype=akamaisiem attackData.clientIP=TERM($ip$) 
+| eval annotation_label = 'attackData.rules{}.message', annotation_category = 'attackData.rules{}.action'</query>
+          <earliest>-7d@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1000</sampleRatio>
+        </search>
         <search>
           <query>index=akamai sourcetype=akamai:datafeed:json ip="$ip$" 
 | timechart latest(score) as score span=1h</query>
@@ -43,6 +150,7 @@
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="charting.annotation.categoryColors">{"deny":"0xff3300","alert":"0xff9900"}</option>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
         <option name="charting.axisLabelsY.majorUnit">1</option>
@@ -69,10 +177,86 @@
         <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
         <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
         <option name="charting.legend.placement">right</option>
+        <option name="refresh.display">progressbar</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
       </chart>
     </panel>
   </row>
-</dashboard>
+  <row>
+    <panel depends="$asn$">
+      <title>Attackers Correlation with Cloud Monitor Logs</title>
+      <input type="multiselect" token="industry">
+        <label>Industry</label>
+        <prefix>(</prefix>
+        <suffix>)</suffix>
+        <valuePrefix>targets.industries.Akamai{}.vertical="</valuePrefix>
+        <valueSuffix>"</valueSuffix>
+        <delimiter> OR </delimiter>
+        <fieldForLabel>vertical</fieldForLabel>
+        <fieldForValue>vertical</fieldForValue>
+        <search>
+          <query>| inputlookup industries 
+| dedup vertical</query>
+        </search>
+        <choice value="*">ALL</choice>
+        <initialValue>*</initialValue>
+      </input>
+      <table>
+        <title>AS Number: $asn$</title>
+        <search>
+          <query>index=akamai sourcetype=akamai:datafeed:json $industry$ source.network="$asn$" 
+| stats latest(score) as score values(targets.industries.Akamai{}.vertical) as target by ip category 
+| join type=left ip 
+    [search sourcetype=akamai:cm:json 
+    | rename message.cliIP as ip 
+    | chart count over ip by message.status]</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <drilldown>
+          <set token="ip_cm">$click.value$</set>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel depends="$ip_cm$">
+      <title>User Agent by $ip_cm$</title>
+      <viz type="wordcloud_app.wordcloud">
+        <search>
+          <query>sourcetype=akamai:cm:json message.cliIP="$ip_cm$" 
+| eval useragent=urldecode('message.UA') 
+| top showperc=false useragent</query>
+          <earliest>-60m@m</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="wordcloud_app.wordcloud.alignmentMode">horizontal</option>
+        <option name="wordcloud_app.wordcloud.backgroundColor">#fff</option>
+        <option name="wordcloud_app.wordcloud.colorBy">colorMode</option>
+        <option name="wordcloud_app.wordcloud.colorMode">categorical</option>
+        <option name="wordcloud_app.wordcloud.maxColor">#3fc77a</option>
+        <option name="wordcloud_app.wordcloud.minColor">#d93f3c</option>
+        <option name="wordcloud_app.wordcloud.numOfBins">3</option>
+        <option name="wordcloud_app.wordcloud.splunkTastic">false</option>
+        <option name="wordcloud_app.wordcloud.useColors">true</option>
+      </viz>
+    </panel>
+  </row>
+</form>

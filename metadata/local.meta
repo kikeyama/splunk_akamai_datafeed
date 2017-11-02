@@ -34,9 +34,23 @@ modtime = 1508409092.958383000
 
 [views/attackers_vector]
 owner = admin
-version = 6.6.3
-modtime = 1509419576.351651000
+version = 7.0.0
+modtime = 1509600236.888894000
 
 [nav/default]
 version = 6.6.3
 modtime = 1509417809.954954000
+
+[transforms/industries]
+access = read : [ * ], write : [ admin, power ]
+export = system
+owner = admin
+version = 7.0.0
+modtime = 1509545406.841627000
+
+[lookups/industries.csv]
+access = read : [ * ], write : [ admin, power ]
+export = system
+owner = admin
+version = 7.0.0
+modtime = 1509545423.160430000
