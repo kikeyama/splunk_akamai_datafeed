@@ -3,8 +3,22 @@
   <row>
     <panel>
       <html>
-        <h1>Data Feed</h1>
+        <h1 align="center">Data Feed</h1>
       </html>
+    </panel>
+    <panel>
+      <html>
+        <h1 align="center">SIEM Integration</h1>
+      </html>
+    </panel>
+    <panel>
+      <html>
+        <h1 align="center">Cloud Monitor</h1>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <single>
         <title>Events Count in 24 hrs</title>
         <search>
@@ -53,9 +67,6 @@
       </event>
     </panel>
     <panel>
-      <html>
-        <h1>SIEM Integration</h1>
-      </html>
       <single>
         <title>Events Count in 24 hrs</title>
         <search>
@@ -105,9 +116,6 @@
       </event>
     </panel>
     <panel>
-      <html>
-        <h1>Cloud Monitor</h1>
-      </html>
       <single>
         <title>Events Count in 24 hrs</title>
         <search>
