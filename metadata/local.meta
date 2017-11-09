@@ -35,11 +35,11 @@ modtime = 1508409092.958383000
 [views/attackers_vector]
 owner = admin
 version = 7.0.0
-modtime = 1509600236.888894000
+modtime = 1510200808.207044000
 
 [nav/default]
-version = 6.6.3
-modtime = 1509417809.954954000
+version = 7.0.0
+modtime = 1510198673.295856000
 
 [transforms/industries]
 access = read : [ * ], write : [ admin, power ]
@@ -54,3 +54,8 @@ export = system
 owner = admin
 version = 7.0.0
 modtime = 1509545423.160430000
+
+[views/akamai_data_overview]
+owner = admin
+version = 7.0.0
+modtime = 1510198069.504180000

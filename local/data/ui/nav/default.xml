@@ -1,6 +1,7 @@
 <nav search_view="search" color="#65A637">
   <view name="data_feed_analysis" default='true' />
   <view name="reputation_search" />
+  <view name="akamai_data_overview" />
   <view name="attackers_vector" />
   <collection label="SEARCH">
     <view name="search" />
