@@ -1,0 +1,80 @@
+<form>
+  <init>
+    <set token="ip">*</set>
+    <set token="vertical">*</set>
+    <set token="score">1</set>
+    <set token="category">*</set>
+  </init>
+  <label>Reputation Search</label>
+  <fieldset submitButton="false">
+    <input type="text" token="ip">
+      <label>IP Address</label>
+      <prefix>TERM(</prefix>
+      <suffix>)</suffix>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="vertical">
+      <label>Target Industry</label>
+      <fieldForLabel>targets.industries.Akamai{}.vertical</fieldForLabel>
+      <fieldForValue>targets.industries.Akamai{}.vertical</fieldForValue>
+      <search>
+        <query>index=akamai sourcetype=akamai:datafeed:json 
+| stats count by targets.industries.Akamai{}.vertical 
+| sort - count</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+      <choice value="*">ALL</choice>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="score">
+      <label>Reputation Score (greater than...)</label>
+      <fieldForLabel>score</fieldForLabel>
+      <fieldForValue>score</fieldForValue>
+      <search>
+        <query>index=akamai sourcetype=akamai:datafeed:json 
+| stats count by score 
+| sort score</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+      <choice value="*">ALL</choice>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="category">
+      <label>Attack Category</label>
+      <fieldForLabel>category</fieldForLabel>
+      <fieldForValue>category</fieldForValue>
+      <search>
+        <query>index=akamai sourcetype=akamai:datafeed:json 
+| stats count by category</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </search>
+      <choice value="*">ALL</choice>
+      <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>index=akamai sourcetype=akamai:datafeed:json ip=$ip$ score&gt;=$score$ category="$category$" 
+| rename properties.eventType as event_type properties.requestsCount as requests_count source.country as country source.network as asn targets.industries.Akamai{}.vertical as industries targets.industries.Akamai{}.subvertical as sub_industries
+| table _time ip category score event_type requests_count country asn industries sub_industries 
+| where industries="$vertical$" OR isnull(industries)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</form>

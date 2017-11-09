@@ -17,9 +17,11 @@ version = 6.6.3
 modtime = 1509083974.887961000
 
 [views/data_feed_analysis]
+access = read : [ * ], write : [ admin, power ]
+export = none
 owner = admin
-version = 6.6.3
-modtime = 1508730980.579295000
+version = 7.0.0
+modtime = 1510222416.667779000
 
 [indexes/test]
 owner = admin
@@ -33,9 +35,11 @@ version = 6.6.3
 modtime = 1508409092.958383000
 
 [views/attackers_vector]
+access = read : [ * ], write : [ admin, power ]
+export = none
 owner = admin
 version = 7.0.0
-modtime = 1510200808.207044000
+modtime = 1510222421.754699000
 
 [nav/default]
 version = 7.0.0
@@ -56,6 +60,15 @@ version = 7.0.0
 modtime = 1509545423.160430000
 
 [views/akamai_data_overview]
+access = read : [ * ], write : [ admin, power ]
+export = none
 owner = admin
 version = 7.0.0
-modtime = 1510198069.504180000
+modtime = 1510222430.305295000
+
+[views/reputation_search]
+access = read : [ * ], write : [ admin, power ]
+export = none
+owner = admin
+version = 7.0.0
+modtime = 1510222408.593889000
